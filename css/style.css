@@ -145,6 +145,12 @@ body.showCart .container{
 .listCart::-webkit-scrollbar{
     width: 0;
 }
+.spacer {
+  margin-top: 50px; 
+}
+.spaced-link {
+  margin-right: 40px; 
+}
 @media only screen and (max-width: 992px) {
     .listProduct{
         grid-template-columns: repeat(3, 1fr);
