@@ -3,6 +3,7 @@ let closeCart = document.querySelector('.close');
 let body = document.querySelector('body');
 let listProductHTML = document.querySelector('.listProduct');
 let listCartHTML = document.querySelector('.listCart');
+let contactUsHTML = document.querySelector('.contactUs');
 let iconCartSpan = document.querySelector('.icon-cart span');
 let listProducts = [];
 let products = [];
@@ -139,7 +140,7 @@ function getCart() {
         getCartItems.forEach(item => {
             let positionProduct2 = listProducts.findIndex((value) => value.id == item.product_id);
             let info2 = listProducts[positionProduct2];
-			wa_msg += `${info2.name}\r\n                         ₹${info2.price} x ${item.quantity} = ₹${info2.price * item.quantity}\r\n`;
+			wa_msg += `${info2.name}\r\n                           ₹${info2.price} x ${item.quantity} = ₹${info2.price * item.quantity}\r\n`;
   			grandTotal += (info2.price * item.quantity);
         })
 		wa_msg += `\r\n *Total Bill Amount: ₹${grandTotal}*\r\n\r\n`;
@@ -159,6 +160,16 @@ function send_handle() {
   var getCartItems = [];
 }
 
+const addContactToHTML = () => {
+    contactUsHTML.innerHTML = `
+        <h4 style="color:black;">CONTACT US</h4>
+        <a href="tel:+917093603760" class="spaced-link"><i class="fa fa-phone" style="font-size:36px;color:black"></i></a>
+        <a href="mailto:health.adda.oils@gmail.com" class="spaced-link"><i class="fa fa-envelope" style="font-size:36px;color:black"></i></a>
+        <a href="https://maps.app.goo.gl/sPzAQJF6wusfymZP8" target="_blank" rel="noopener noreferrer" class="spaced-link"><i class="fa fa-map-marker" style="font-size:36px;color:black"></i></a>
+        <a href="https://wa.me/917093603760?text=Hi!%20Health%20Adda!"><i class="fa fa-whatsapp" style="font-size:36px;color:green"></i></a>
+	`;
+}
+
 const initApp = () => {
     // get data product
     fetch('products.json')
@@ -172,6 +183,8 @@ const initApp = () => {
             cart = JSON.parse(localStorage.getItem('cart'));
             addCartToHTML();
         }
+		
+		addContactToHTML();
     })
 }
 initApp();
