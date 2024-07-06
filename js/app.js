@@ -9,17 +9,12 @@ let listProducts = [];
 let products = [];
 var cart = [];
 var getCartItems = [];
-let openButton = document.getElementById("open-popup");
-let popup = document.getElementById("popup");
-let closeButton = document.getElementById("close-popup");
+var openButton = document.getElementById("open-popup");
+var popup = document.getElementById("popup");
 
 openButton.addEventListener("click", () => {
   popup.classList.add("show"); // Add "show" class to display popup
   setTimeout(() => {popup.classList.remove("show");}, 800);
-});
-
-closeButton.addEventListener("click", () => {
-  popup.classList.remove("show"); // Remove "show" class to hide popup
 });
 
 iconCart.addEventListener('click', () => {
@@ -41,7 +36,7 @@ const addDataToHTML = () => {
                 <h2>${product.name}</h2>
 				<div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
                 <button class="addCart" id="open-popup">Add To Cart</button>
-                <div id="popup"><h5>ADDED</h5><button id="close-popup">Close</button></div>
+                <div id="popup"><h5>ADDED</h5></div>
 			`;
             listProductHTML.appendChild(newProduct);
         })
