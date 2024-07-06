@@ -9,8 +9,8 @@ let listProducts = [];
 let products = [];
 var cart = [];
 var getCartItems = [];
-const openButton = document.getElementById("open-popup");
-const popup = document.getElementById("popup");
+var openButton = document.getElementById("open-popup");
+var popup = document.getElementById("popup");
 
 iconCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
