@@ -36,7 +36,7 @@ const addDataToHTML = () => {
                 <h2>${product.name}</h2>
 				<div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
                 <button class="addCart" id="open-popup">Add To Cart</button>
-                <div id="popup"><h5>ADDED</h5></div>
+                
 			`;
             listProductHTML.appendChild(newProduct);
         })
