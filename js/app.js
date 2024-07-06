@@ -9,8 +9,6 @@ let listProducts = [];
 let products = [];
 var cart = [];
 var getCartItems = [];
-var openButton = document.getElementById("open-popup");
-var popup = document.getElementById("popup");
 
 iconCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
@@ -30,8 +28,7 @@ const addDataToHTML = () => {
 			    <img src="${product.image}" alt="">
                 <h2>${product.name}</h2>
 				<div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
-                <button class="addCart" id="open-popup">Add To Cart</button>
-                <div id="popup"><h5>ADDED ${product.name}</h5></div>
+                <button class="addCart">Add To Cart</button>
 			`;
             listProductHTML.appendChild(newProduct);
         })
@@ -45,8 +42,6 @@ listProductHTML.addEventListener('click', (event) => {
         addToCart(id_product);
     }
 })
-
-
 
 const addToCart = (product_id) => {
     let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
