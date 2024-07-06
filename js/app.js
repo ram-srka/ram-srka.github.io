@@ -9,8 +9,8 @@ let listProducts = [];
 let products = [];
 var cart = [];
 var getCartItems = [];
-var openButton = document.getElementById("open-popup");
-var popup = document.getElementById("popup");
+const openButton = document.getElementById("open-popup");
+const popup = document.getElementById("popup");
 
 iconCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
@@ -44,13 +44,11 @@ listProductHTML.addEventListener('click', (event) => {
     if(positionClick.classList.contains('addCart')){
         let id_product = positionClick.parentElement.dataset.id;
         addToCart(id_product);
-        popup.classList.add("show"); 
-        setTimeout(() => {popup.classList.remove("show");}, 800);
     }
 })
 
 openButton.addEventListener("click", () => {
-  popup.classList.add("show"); // Add "show" class to display popup
+  popup.classList.add("show"); 
   setTimeout(() => {popup.classList.remove("show");}, 800);
 })
 
