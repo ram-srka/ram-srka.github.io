@@ -32,7 +32,7 @@ const addDataToHTML = () => {
                 <h2>${product.name}</h2>
                 <div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
                 <button class="addCart" id="open-popup">Add To Cart</button>
-                <div id="popup"><h5>ADDED</h5></div>
+                <div id="popup"><h5>ADDED ${product.name}</h5></div>
 			`;
             listProductHTML.appendChild(newProduct);
         })
@@ -48,7 +48,7 @@ listProductHTML.addEventListener('click', (event) => {
 })
 
 openButton.addEventListener("click", () => {
-  popup.classList.add("show"); 
+  popup.classList.add("show"); // Add "show" class to display popup
   setTimeout(() => {popup.classList.remove("show");}, 800);
 })
 
