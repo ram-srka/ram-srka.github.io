@@ -9,6 +9,10 @@ let listProducts = [];
 let products = [];
 var cart = [];
 var getCartItems = [];
+const openButton = document.getElementById("open-popup");
+const popup = document.getElementById("popup");
+const closeButton = document.getElementById("close-popup");
+
 
 iconCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
@@ -28,7 +32,8 @@ const addDataToHTML = () => {
 			    <img src="${product.image}" alt="">
                 <h2>${product.name}</h2>
 				<div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
-                <button class="addCart">Add To Cart</button>
+                <button class="addCart" id="open-popup">Add To Cart</button>
+                <div id="popup"><h5>ADDED</h5><button id="close-popup">Close</button></div>
 			`;
             listProductHTML.appendChild(newProduct);
         })
@@ -42,6 +47,16 @@ listProductHTML.addEventListener('click', (event) => {
         addToCart(id_product);
     }
 })
+
+openButton.addEventListener("click", () => {
+  popup.classList.add("show"); // Add "show" class to display popup
+  setTimeout(() => {popup.classList.remove("show");}, 800);
+});
+
+closeButton.addEventListener("click", () => {
+  popup.classList.remove("show"); // Remove "show" class to hide popup
+});
+
 
 const addToCart = (product_id) => {
     let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
