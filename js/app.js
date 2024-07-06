@@ -13,6 +13,14 @@ const openButton = document.getElementById("open-popup");
 const popup = document.getElementById("popup");
 const closeButton = document.getElementById("close-popup");
 
+openButton.addEventListener("click", () => {
+  popup.classList.add("show"); // Add "show" class to display popup
+  setTimeout(() => {popup.classList.remove("show");}, 800);
+});
+
+closeButton.addEventListener("click", () => {
+  popup.classList.remove("show"); // Remove "show" class to hide popup
+});
 
 iconCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
@@ -48,14 +56,6 @@ listProductHTML.addEventListener('click', (event) => {
     }
 })
 
-openButton.addEventListener("click", () => {
-  popup.classList.add("show"); // Add "show" class to display popup
-  setTimeout(() => {popup.classList.remove("show");}, 800);
-});
-
-closeButton.addEventListener("click", () => {
-  popup.classList.remove("show"); // Remove "show" class to hide popup
-});
 
 
 const addToCart = (product_id) => {
