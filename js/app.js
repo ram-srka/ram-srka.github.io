@@ -9,9 +9,9 @@ let listProducts = [];
 let products = [];
 var cart = [];
 var getCartItems = [];
-const openButton = document.getElementById("open-popup");
-const popup = document.getElementById("popup");
-const closeButton = document.getElementById("close-popup");
+let openButton = document.getElementById("open-popup");
+let popup = document.getElementById("popup");
+let closeButton = document.getElementById("close-popup");
 
 openButton.addEventListener("click", () => {
   popup.classList.add("show"); // Add "show" class to display popup
@@ -41,7 +41,7 @@ const addDataToHTML = () => {
                 <h2>${product.name}</h2>
 				<div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
                 <button class="addCart" id="open-popup">Add To Cart</button>
-                
+                <div id="popup"><h5>ADDED</h5><button id="close-popup">Close</button></div>
 			`;
             listProductHTML.appendChild(newProduct);
         })
