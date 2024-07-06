@@ -19,7 +19,6 @@ closeCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
 })
 
-
 const addDataToHTML = () => {
     listProductHTML.innerHTML = '';
     if(listProducts.length > 0){
@@ -28,9 +27,9 @@ const addDataToHTML = () => {
             newProduct.classList.add('item');
             newProduct.dataset.id = product.id;
             newProduct.innerHTML = `
-                <img src="${product.image}" alt="">
+			    <img src="${product.image}" alt="">
                 <h2>${product.name}</h2>
-                <div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
+				<div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
                 <button class="addCart" id="open-popup">Add To Cart</button>
                 <div id="popup"><h5>ADDED ${product.name}</h5></div>
 			`;
@@ -47,10 +46,6 @@ listProductHTML.addEventListener('click', (event) => {
     }
 })
 
-openButton.addEventListener("click", () => {
-  popup.classList.add("show"); // Add "show" class to display popup
-  setTimeout(() => {popup.classList.remove("show");}, 800);
-})
 
 
 const addToCart = (product_id) => {
