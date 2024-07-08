@@ -11,7 +11,7 @@ body{
     margin: auto;
     max-width: 90vw;
     text-align: center;
-	padding-top: calc(10px + 60px); /* Add header height to padding */  /* Previous: padding-top: 10px; */
+	padding-top: calc(10px + 60px); /* Add header height to padding */ 
     transition: transform .5s;
 }
 svg{
@@ -26,7 +26,7 @@ header{
     top: 0; /* Positioned at the top of the viewport */
     left: 0; /* Positioned at the left of the viewport */
     width: 100%; /* Span the entire viewport width */
-    background-color: #ffc862;  /* Optional background color #fff */
+    background-color: #ffc862;  /* Background color */
     z-index: 10; /* Ensure the header stays on top of other elements */
 }
 .icon-cart{
