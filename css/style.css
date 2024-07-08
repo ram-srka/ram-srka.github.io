@@ -11,7 +11,7 @@ body{
     margin: auto;
     max-width: 90vw;
     text-align: center;
-    padding-top: 10px;
+	padding-top: calc(10px + 60px); /* Add header height to padding */  /* Previous: padding-top: 10px; */
     transition: transform .5s;
 }
 svg{
@@ -22,6 +22,12 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
+    position: fixed; /* Re-introduced fixed positioning */
+    top: 0; /* Positioned at the top of the viewport */
+    left: 10; /* Positioned at the left of the viewport */
+    width: 90%; /* Span the entire viewport width */
+    background-color: #fff;  /* Optional background color */
+    z-index: 10; /* Ensure the header stays on top of other elements */
 }
 .icon-cart{
     position: relative;
