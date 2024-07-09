@@ -9,6 +9,8 @@ let listProducts = [];
 let products = [];
 var cart = [];
 var getCartItems = [];
+let slideIndex = 0;
+const slides = document.getElementsByClassName("slide");
 
 iconCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
@@ -160,6 +162,40 @@ function send_handle() {
   var getCartItems = [];
 }
 
+// Function to show slides
+function showSlides() {
+    // Hide all slides
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+	//dots
+	var dots = document.getElementsByClassName("demo");
+	for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" w3-white", "");
+    }
+    // Increment slideIndex and wrap around if necessary
+    slideIndex = (slideIndex + slides.length) % slides.length;
+    slides[slideIndex].style.display = "block";
+	dots[slideIndex].className += " w3-white";
+}
+
+// Function to change slide by a specified increment (+1 or -1)
+function changeSlide(n) {
+    slideIndex += n;
+    showSlides();
+}
+
+function currentDiv(n) {
+    slideIndex = n
+    showSlides();
+}
+
+// Automatic slideshow interval (change slides every 2 seconds)
+setInterval(function() {
+    slideIndex++;
+    showSlides();
+}, 2000);
+
 const addContactToHTML = () => {
     contactUsHTML.innerHTML = `
         <h4 style="color:black;">CONTACT US</h4>
@@ -183,7 +219,9 @@ const initApp = () => {
             cart = JSON.parse(localStorage.getItem('cart'));
             addCartToHTML();
         }
-		
+		// Show the first slide initially
+		showSlides();
+		// Contact Details
 		addContactToHTML();
     })
 }
