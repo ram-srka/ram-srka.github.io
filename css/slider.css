@@ -1,15 +1,28 @@
 /* Slideshow container */
 .slideshow-container {
     position: relative;
-    max-width: 800px;
+    max-width: 90vw  /* 800px; */
     margin: auto;
+	overflow: hidden; /* Ensure no overflow creates whitespace */
 }
 
 /* Hide all slides by default */
 .slide {
     display: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
+/* Ensure that all images inside the slides are curved */
+.slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 50px; /* Adjust the value to control the curvature */
+    overflow: hidden; /* Ensure the curved border is applied */
+    padding: 0;
+}
 /* Show active slide */
 .slide.active {
     display: block;
@@ -26,7 +39,7 @@
     font-weight: bold;
     font-size: 18px;
     transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
+    border-radius: 0 10px 10px 0;
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.3);
     text-decoration: none;
@@ -35,7 +48,7 @@
 /* Position the right arrow */
 .next {
     right: 0;
-    border-radius: 3px 0 0 3px;
+    border-radius: 10px 0 0 10px;
 }
 
 /* On hover, add a black background color */
