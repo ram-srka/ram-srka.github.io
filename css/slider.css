@@ -30,7 +30,7 @@
 
 /* Navigation arrows */
 .prev, .next {
-    position: absolute;
+    position: absolute; /* absolute; */
     top: 50%;
     width: auto;
     padding: 16px;
