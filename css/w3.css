@@ -3,7 +3,7 @@
 .w3-bar{width:100%;overflow:hidden}.w3-center .w3-bar{display:inline-block;width:auto}
 .w3-bar-block.w3-center .w3-bar-item{text-align:center}.w3-block{display:block;width:100%}
 .w3-container:after,.w3-container:before,.w3-panel:after,.w3-panel:before,.w3-row:after,.w3-row:before,.w3-row-padding:after,.w3-row-padding:before,
-.w3-content,.w3-auto{margin-left:auto;margin-right:auto}.w3-content{max-width:40vw}.w3-auto{max-width:1140px}
+.w3-content,.w3-auto{margin-left:auto;margin-right:auto}.w3-content{max-width:40vw;text-align: left !important;}.w3-auto{max-width:1140px}
 .w3-display-bottommiddle{position:absolute;left:50%;bottom:0;transform:translate(-50%,0%);-ms-transform:translate(-50%,0%)}
 .w3-display-container:hover .w3-display-hover{display:block}.w3-display-container:hover span.w3-display-hover{display:inline-block}.w3-display-hover{display:none}
 .w3-container,.w3-panel{padding:0.01em 16px}.w3-panel{margin-top:16px;margin-bottom:16px}
@@ -19,15 +19,11 @@
 .w3-text-white,.w3-hover-text-white:hover{color:#fff!important}
 
 @media only screen and (max-width: 992px) {
-    .w3-content{
-        max-width: 90vw;
-    }
+    .w3-content{max-width: 90vw;}
 }
 
 
 /* mobile */
 @media only screen and (max-width: 768px) {
-    .w3-content{
-        max-width: 90vw;
-    }
+    .w3-content{max-width: 90vw;}
 }
