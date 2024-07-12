@@ -1,9 +1,9 @@
 /* Slideshow container */
 .slideshow-container {
     position: relative;
-    max-width: 90vw  /* 800px; */
+    max-width: 90vw;
     margin: auto;
-	overflow: hidden; /* Ensure no overflow creates whitespace */
+	overflow: hidden; 
 }
 
 /* Hide all slides by default */
