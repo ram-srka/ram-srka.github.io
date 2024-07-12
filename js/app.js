@@ -3,6 +3,7 @@ let closeCart = document.querySelector('.close');
 let body = document.querySelector('body');
 let listProductHTML = document.querySelector('.listProduct');
 let listCartHTML = document.querySelector('.listCart');
+let slideShowHTML = document.querySelector('.slideShow');
 let contactUsHTML = document.querySelector('.contactUs');
 let iconCartSpan = document.querySelector('.icon-cart span');
 let listProducts = [];
@@ -196,6 +197,35 @@ setInterval(function() {
     showSlides();
 }, 2000);
 
+const addSlideToHTML = () => {
+    slideShowHTML.innerHTML = `
+        <div class="w3-content w3-display-container">
+            <div class="slide"><img src="image/1.jpg" alt="Slide 1" style="width:100%"></div>
+            <div class="slide"><img src="image/2.jpg" alt="Slide 2" style="width:100%"></div>
+            <div class="slide"><img src="image/3.jpg" alt="Slide 3" style="width:100%"></div>        
+            <div class="slide"><img src="image/4.jpg" alt="Slide 4" style="width:100%"></div>
+            <div class="slide"><img src="image/5.jpg" alt="Slide 5" style="width:100%"></div>
+            <div class="slide"><img src="image/6.jpg" alt="Slide 6" style="width:100%"></div>
+            <div class="slide"><img src="image/7.jpg" alt="Slide 7" style="width:100%"></div>
+            <div class="slide"><img src="image/8.jpg" alt="Slide 8" style="width:100%"></div>
+            <div class="slide"><img src="image/9.jpg" alt="Slide 9" style="width:100%"></div>
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        	<div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(6)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(7)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(8)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(9)"></span>
+        	</div>
+        </div>
+	`;
+}
+
 const addContactToHTML = () => {
     contactUsHTML.innerHTML = `
         <h4 style="color:black;">CONTACT US</h4>
@@ -221,6 +251,8 @@ const initApp = () => {
         }
 		// Show the first slide initially
 		showSlides();
+		// SlideShow
+		addSlideToHTML();
 		// Contact Details
 		addContactToHTML();
     })
