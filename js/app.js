@@ -249,10 +249,10 @@ const initApp = () => {
             cart = JSON.parse(localStorage.getItem('cart'));
             addCartToHTML();
         }
-		// Show the first slide initially
-		showSlides();
 		// SlideShow
 		addSlideToHTML();
+		//Show the first slide initially
+		showSlides();
 		// Contact Details
 		addContactToHTML();
     })
