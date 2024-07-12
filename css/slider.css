@@ -22,6 +22,7 @@
     border-radius: 50px; /* Adjust the value to control the curvature */
     overflow: hidden; /* Ensure the curved border is applied */
     padding: 0;
+	object-fit: cover;
 }
 /* Show active slide */
 .slide.active {
