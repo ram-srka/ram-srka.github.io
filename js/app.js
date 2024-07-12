@@ -209,6 +209,7 @@ const addSlideToHTML = () => {
             <div class="slide"><img src="image/7.jpg" alt="Slide 7" style="width:100%"></div>
             <div class="slide"><img src="image/8.jpg" alt="Slide 8" style="width:100%"></div>
             <div class="slide"><img src="image/9.jpg" alt="Slide 9" style="width:100%"></div>
+            <div class="slide"><img src="image/10.jpg" alt="Slide 10" style="width:100%"></div>
             <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
             <a class="next" onclick="changeSlide(1)">&#10095;</a>
         	<div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
@@ -221,6 +222,7 @@ const addSlideToHTML = () => {
                 <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(7)"></span>
                 <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(8)"></span>
                 <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(9)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(10)"></span>
         	</div>
         </div>
 	`;
