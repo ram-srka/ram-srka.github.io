@@ -27,7 +27,7 @@ const addDataToHTML = () => {
             let newProduct = document.createElement('div');
             newProduct.classList.add('item');
             newProduct.dataset.id = product.id;
-            
+
             // Check if this product is already in the cart
             let cartItem = cart.find(item => item.product_id === product.id);
             let quantity = cartItem ? cartItem.quantity : 0;
@@ -46,10 +46,20 @@ const addDataToHTML = () => {
                     `<button class="addCart">Add To Cart</button>`
                 }
             `;
+            
+            // Append the new product item to the listProductHTML
             listProductHTML.appendChild(newProduct);
-        })
+
+            // Add event listener to the "Add to Cart" button
+            let addButton = newProduct.querySelector('.addCart');
+            addButton.addEventListener('click', () => {
+                addToCart(product.id);
+				addDataToHTML();
+            });
+        });
     }
-}
+};
+
 
 listProductHTML.addEventListener('click', (event) => {
     let positionClick = event.target;
@@ -62,11 +72,28 @@ listProductHTML.addEventListener('click', (event) => {
     } else if (positionClick.classList.contains('minus')) {
         let product_id = positionClick.parentElement.parentElement.dataset.id;
         changeQuantity(product_id, 'minus');
+		addDataToHTML();
+    } else if (positionClick.classList.contains('plus')) {
+        let product_id = positionClick.parentElement.parentElement.dataset.id;
+        changeQuantity(product_id, 'plus');
+		addDataToHTML();
+    }
+})
+
+listProductHTML.addEventListener('click', (event) => {
+    let positionClick = event.target;
+    if (positionClick.classList.contains('addCart')) {
+        let id_product = positionClick.parentElement.dataset.id;
+        addToCart(id_product);
+    } else if (positionClick.classList.contains('minus')) {
+        let product_id = positionClick.parentElement.parentElement.dataset.id;
+        changeQuantity(product_id, 'minus');
     } else if (positionClick.classList.contains('plus')) {
         let product_id = positionClick.parentElement.parentElement.dataset.id;
         changeQuantity(product_id, 'plus');
     }
-})
+});
+
 
 const addToCart = (product_id) => {
     let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
