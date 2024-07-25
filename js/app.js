@@ -43,6 +43,15 @@ listProductHTML.addEventListener('click', (event) => {
     if(positionClick.classList.contains('addCart')){
         let id_product = positionClick.parentElement.dataset.id;
         addToCart(id_product);
+
+        // Replace "Add to Cart" button with quantity controls
+        let parentItem = positionClick.parentElement;
+        let quantityControls = `
+            <span class="minus">-</span>
+            <span>1</span>
+            <span class="plus">+</span>
+        `;
+        parentItem.innerHTML += quantityControls;
     }
 })
 
