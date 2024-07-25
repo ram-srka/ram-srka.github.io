@@ -22,20 +22,20 @@ closeCart.addEventListener('click', () => {
 
 const addDataToHTML = () => {
     listProductHTML.innerHTML = '';
-    if (listProducts.length > 0) {
+    if(listProducts.length > 0){
         listProducts.forEach(product => {
             let newProduct = document.createElement('div');
             newProduct.classList.add('item');
             newProduct.dataset.id = product.id;
-
+			
             // Check if this product is already in the cart
             let cartItem = cart.find(item => item.product_id === product.id);
             let quantity = cartItem ? cartItem.quantity : 0;
 
             newProduct.innerHTML = `
-                <img src="${product.image}" alt="">
+			    <img src="${product.image}" alt="">
                 <h2>${product.name}</h2>
-                <div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
+				<div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
                 ${quantity > 0 ?
                     `<div class="quantity-controls">
                         <button class="minus">-</button>
@@ -45,103 +45,48 @@ const addDataToHTML = () => {
                     :
                     `<button class="addCart">Add To Cart</button>`
                 }
-            `;
-            
-            // Append the new product item to the listProductHTML
+			`;
             listProductHTML.appendChild(newProduct);
-
-            // Add event listener to the "Add to Cart" button
-            let addButton = newProduct.querySelector('.addCart');
-            addButton.addEventListener('click', () => {
-                addToCart(product.id);
-            });
-        });
+        })
     }
-};
-
+}
 
 listProductHTML.addEventListener('click', (event) => {
     let positionClick = event.target;
-    if (positionClick.classList.contains('addCart')) {
+    if(positionClick.classList.contains('addCart')){
         let id_product = positionClick.parentElement.dataset.id;
         addToCart(id_product);
-
-        // Update the product list display to reflect the updated cart quantity
-        addDataToHTML();
-    } else if (positionClick.classList.contains('minus')) {
-        let product_id = positionClick.parentElement.parentElement.dataset.id;
-        changeQuantity(product_id, 'minus');
-    } else if (positionClick.classList.contains('plus')) {
-        let product_id = positionClick.parentElement.parentElement.dataset.id;
-        changeQuantity(product_id, 'plus');
     }
 })
 
-listProductHTML.addEventListener('click', (event) => {
-    let positionClick = event.target;
-    if (positionClick.classList.contains('addCart')) {
-        let id_product = positionClick.parentElement.dataset.id;
-        addToCart(id_product);
-    } else if (positionClick.classList.contains('minus')) {
-        let product_id = positionClick.parentElement.parentElement.dataset.id;
-        changeQuantity(product_id, 'minus');
-    } else if (positionClick.classList.contains('plus')) {
-        let product_id = positionClick.parentElement.parentElement.dataset.id;
-        changeQuantity(product_id, 'plus');
-    }
-});
-
-
 const addToCart = (product_id) => {
     let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
-    if (cart.length <= 0) {
+    if(cart.length <= 0){
         cart = [{
             product_id: product_id,
             quantity: 1
         }];
-    } else if (positionThisProductInCart < 0) {
+    }else if(positionThisProductInCart < 0){
         cart.push({
             product_id: product_id,
             quantity: 1
         });
-    } else {
+    }else{
         cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
     }
     addCartToHTML();
     addCartToMemory();
 }
 
-const changeQuantity = (product_id, type) => {
-    let positionItemInCart = cart.findIndex((value) => value.product_id == product_id);
-    if (positionItemInCart >= 0) {
-        switch (type) {
-            case 'plus':
-                cart[positionItemInCart].quantity = cart[positionItemInCart].quantity + 1;
-                break;
-            case 'minus':
-                let valueChange = cart[positionItemInCart].quantity - 1;
-                if (valueChange > 0) {
-                    cart[positionItemInCart].quantity = valueChange;
-                } else {
-                    cart.splice(positionItemInCart, 1);
-                }
-                break;
-        }
-    }
-    addCartToMemory();
-    addCartToHTML();
-
-    // Update the product list display to reflect the updated cart quantity
-    addDataToHTML();
+const addCartToMemory = () => {
+    localStorage.setItem('cart', JSON.stringify(cart));
 }
-
-
 const addCartToHTML = () => {
     listCartHTML.innerHTML = '';
     let totalQuantity = 0;
-    if (cart.length > 0) {
+    if(cart.length > 0){
         cart.forEach(item => {
-            totalQuantity += item.quantity;
+            totalQuantity = totalQuantity +  item.quantity;
             let newItem = document.createElement('div');
             newItem.classList.add('item');
             newItem.dataset.id = item.product_id;
@@ -149,32 +94,24 @@ const addCartToHTML = () => {
             let info = listProducts[positionProduct];
             listCartHTML.appendChild(newItem);
             newItem.innerHTML = `
-                <div class="image">
+            <div class="image">
                     <img src="${info.image}">
                 </div>
                 <div class="name">
                     ${info.name}
                 </div>
                 <div class="totalPrice">
-                    ₹${info.price * item.quantity}
-                </div>
-                <div class="quantity-controls">
-                    <button class="minus">-</button>
-                    <span class="quantity">${item.quantity}</span>
-                    <button class="plus">+</button>
+				    ₹${info.price * item.quantity}</div>
+                <div class="quantity">
+                    <span class="minus">-</span>
+                    <span>${item.quantity}</span>
+                    <span class="plus">+</span>
                 </div>
             `;
         })
     }
     iconCartSpan.innerText = totalQuantity;
 }
-
-
-const addCartToMemory = () => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-
 listCartHTML.addEventListener('click', (event) => {
     let positionClick = event.target;
     if(positionClick.classList.contains('minus') || positionClick.classList.contains('plus')){
@@ -186,6 +123,28 @@ listCartHTML.addEventListener('click', (event) => {
         changeQuantity(product_id, type);
     }
 })
+const changeQuantity = (product_id, type) => {
+    let positionItemInCart = cart.findIndex((value) => value.product_id == product_id);
+    if(positionItemInCart >= 0){
+        let info = cart[positionItemInCart];
+        switch (type) {
+            case 'plus':
+                cart[positionItemInCart].quantity = cart[positionItemInCart].quantity + 1;
+                break;
+        
+            default:
+                let valueChange = cart[positionItemInCart].quantity - 1;
+                if (valueChange > 0) {
+                    cart[positionItemInCart].quantity = valueChange;
+                }else{
+                    cart.splice(positionItemInCart, 1);
+                }
+                break;
+        }
+    }
+    addCartToMemory();
+    addCartToHTML();
+}
 
 function getCart() {
     if(localStorage.getItem('cart')){
