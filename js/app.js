@@ -71,11 +71,9 @@ listProductHTML.addEventListener('click', (event) => {
     } else if (positionClick.classList.contains('minus')) {
         let product_id = positionClick.parentElement.parentElement.dataset.id;
         changeQuantity(product_id, 'minus');
-		addDataToHTML();
     } else if (positionClick.classList.contains('plus')) {
         let product_id = positionClick.parentElement.parentElement.dataset.id;
         changeQuantity(product_id, 'plus');
-		addDataToHTML();
     }
 })
 
