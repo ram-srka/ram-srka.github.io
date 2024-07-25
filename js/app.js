@@ -51,20 +51,21 @@ const addDataToHTML = () => {
             // Add event listener to the "Add to Cart" button
             let addButton = newProduct.querySelector('.addCart');
             addButton.addEventListener('click', () => {
-                addToCart(product.id);
+                //addToCart(product.id);
+				let abc = '';
             });
         })
     }
 }
 
-// listProductHTML.addEventListener('click', (event) => {
-//     let positionClick = event.target;
-//     if(positionClick.classList.contains('addCart')){
-//         let id_product = positionClick.parentElement.dataset.id;
-//         addToCart(id_product);
-// 		addDataToHTML();
-//     }
-// })
+listProductHTML.addEventListener('click', (event) => {
+    let positionClick = event.target;
+    if(positionClick.classList.contains('addCart')){
+        let id_product = positionClick.parentElement.dataset.id;
+        addToCart(id_product);
+		addDataToHTML();
+    }
+})
 
 const addToCart = (product_id) => {
     let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
