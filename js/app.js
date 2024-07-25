@@ -57,14 +57,14 @@ const addDataToHTML = () => {
     }
 }
 
-listProductHTML.addEventListener('click', (event) => {
-    let positionClick = event.target;
-    if(positionClick.classList.contains('addCart')){
-        let id_product = positionClick.parentElement.dataset.id;
-        addToCart(id_product);
-		addDataToHTML();
-    }
-})
+// listProductHTML.addEventListener('click', (event) => {
+//     let positionClick = event.target;
+//     if(positionClick.classList.contains('addCart')){
+//         let id_product = positionClick.parentElement.dataset.id;
+//         addToCart(id_product);
+// 		addDataToHTML();
+//     }
+// })
 
 const addToCart = (product_id) => {
     let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
