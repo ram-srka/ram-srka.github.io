@@ -54,7 +54,6 @@ const addDataToHTML = () => {
             let addButton = newProduct.querySelector('.addCart');
             addButton.addEventListener('click', () => {
                 addToCart(product.id);
-				addDataToHTML();
             });
         });
     }
