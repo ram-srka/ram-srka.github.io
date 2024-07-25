@@ -46,7 +46,13 @@ const addDataToHTML = () => {
                     `<button class="addCart">Add To Cart</button>`
                 }
 			`;
+			// Append the new product item to the listProductHTML
             listProductHTML.appendChild(newProduct);
+            // Add event listener to the "Add to Cart" button
+            let addButton = newProduct.querySelector('.addCart');
+            addButton.addEventListener('click', () => {
+                addToCart(product.id);
+            });
         })
     }
 }
