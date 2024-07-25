@@ -33,7 +33,7 @@ const addDataToHTML = () => {
 				<div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
                 <div class="quantity-controls">
                     <button class="minus">-</button>
-                    <span class="quantity">0</span>
+                    <span class="quantity">${item.quantity}</span>
                     <button class="plus">+</button>
                 </div>
 			`;
