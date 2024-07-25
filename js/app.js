@@ -31,8 +31,16 @@ const addDataToHTML = () => {
 			    <img src="${product.image}" alt="">
                 <h2>${product.name}</h2>
 				<div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
-                <button class="addCart">Add To Cart</button>
+                <div class="quantity-controls">
+                    <button class="minus">-</button>
+                    <span class="quantity">0</span>
+                    <button class="plus">+</button>
+                </div>
 			`;
+            let addButton = document.createElement('button');
+            addButton.classList.add('addCart');
+            addButton.textContent = 'Add To Cart';
+            newProduct.appendChild(addButton);
             listProductHTML.appendChild(newProduct);
         })
     }
@@ -43,15 +51,12 @@ listProductHTML.addEventListener('click', (event) => {
     if(positionClick.classList.contains('addCart')){
         let id_product = positionClick.parentElement.dataset.id;
         addToCart(id_product);
-
-        // Replace "Add to Cart" button with quantity controls
-        let parentItem = positionClick.parentElement;
-        let quantityControls = `
-            <span class="minus">-</span>
-            <span>1</span>
-            <span class="plus">+</span>
-        `;
-        parentItem.innerHTML += quantityControls;
+    } else if (positionClick.classList.contains('minus')) {
+        let product_id = positionClick.parentElement.parentElement.dataset.id;
+        changeQuantity(product_id, 'minus');
+    } else if (positionClick.classList.contains('plus')) {
+        let product_id = positionClick.parentElement.parentElement.dataset.id;
+        changeQuantity(product_id, 'plus');
     }
 })
 
