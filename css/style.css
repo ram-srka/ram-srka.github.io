@@ -162,11 +162,10 @@ body.showCart .container{
 .spaced-link {
   margin-right: 40px; 
 }
-
 .popup {
     display: none;
     position: fixed;
-    top: 20px;
+    top: 50%;
     left: 50%;
     transform: translateX(-50%);
     background-color: #4CAF50;
