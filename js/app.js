@@ -245,9 +245,7 @@ const addContactToHTML = () => {
 // Show popup function
 const showPopup = () => {
     popup.classList.add("show"); 
-    setTimeout(() => {
-        popup.classList.remove("show");
-    }, 800);
+    setTimeout(() => {popup.classList.remove("show");}, 800);
 };
 
 const initApp = () => {

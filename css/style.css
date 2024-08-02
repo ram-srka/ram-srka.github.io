@@ -166,7 +166,7 @@ body.showCart .container{
     display: none;
     position: fixed;
     top: 50%;
-    left: 50%;
+    left: 35%;
     transform: translateX(-50%);
     background-color: #4CAF50;
     color: white;
