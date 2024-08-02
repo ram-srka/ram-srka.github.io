@@ -162,6 +162,25 @@ body.showCart .container{
 .spaced-link {
   margin-right: 40px; 
 }
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.popup.show {
+    display: block;
+}
+
+
 @media only screen and (max-width: 992px) {
     .listProduct{
         grid-template-columns: repeat(3, 1fr);
