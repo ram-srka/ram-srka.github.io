@@ -6,6 +6,7 @@ let listCartHTML = document.querySelector('.listCart');
 let slideShowHTML = document.querySelector('.slideShow');
 let contactUsHTML = document.querySelector('.contactUs');
 let iconCartSpan = document.querySelector('.icon-cart span');
+let popup = document.getElementById('popup');
 let listProducts = [];
 let products = [];
 var cart = [];
@@ -13,67 +14,69 @@ var getCartItems = [];
 let slideIndex = 0;
 const slides = document.getElementsByClassName("slide");
 
+// Event Listeners
 iconCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
-})
+});
 closeCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
-})
+});
 
+// Add data to HTML
 const addDataToHTML = () => {
     listProductHTML.innerHTML = '';
-    if(listProducts.length > 0){
+    if (listProducts.length > 0) {
         listProducts.forEach(product => {
             let newProduct = document.createElement('div');
             newProduct.classList.add('item');
             newProduct.dataset.id = product.id;
             newProduct.innerHTML = `
-			    <img src="${product.image}" alt="">
+                <img src="${product.image}" alt="">
                 <h2>${product.name}</h2>
-				<div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
+                <div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
                 <button class="addCart">Add To Cart</button>
-			`;
+            `;
             listProductHTML.appendChild(newProduct);
-        })
+        });
     }
-}
+};
 
+// Add to cart functionality
 listProductHTML.addEventListener('click', (event) => {
     let positionClick = event.target;
-    if(positionClick.classList.contains('addCart')){
+    if (positionClick.classList.contains('addCart')) {
         let id_product = positionClick.parentElement.dataset.id;
         addToCart(id_product);
+        showPopup();
     }
-})
+});
 
+// Add to cart function
 const addToCart = (product_id) => {
     let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
-    if(cart.length <= 0){
-        cart = [{
-            product_id: product_id,
-            quantity: 1
-        }];
-    }else if(positionThisProductInCart < 0){
-        cart.push({
-            product_id: product_id,
-            quantity: 1
-        });
-    }else{
-        cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
+    if (cart.length <= 0) {
+        cart = [{ product_id: product_id, quantity: 1 }];
+    } else if (positionThisProductInCart < 0) {
+        cart.push({ product_id: product_id, quantity: 1 });
+    } else {
+        cart[positionThisProductInCart].quantity++;
     }
     addCartToHTML();
     addCartToMemory();
-}
+};
 
+// Add cart to memory
 const addCartToMemory = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
-}
+};
+
+// Add cart to HTML
 const addCartToHTML = () => {
     listCartHTML.innerHTML = '';
     let totalQuantity = 0;
-    if(cart.length > 0){
+    if (cart.length > 0) {
         cart.forEach(item => {
-            totalQuantity = totalQuantity +  item.quantity;
+            totalQuantity += item.quantity;
             let newItem = document.createElement('div');
             newItem.classList.add('item');
             newItem.dataset.id = item.product_id;
@@ -81,24 +84,20 @@ const addCartToHTML = () => {
             let info = listProducts[positionProduct];
             listCartHTML.appendChild(newItem);
             newItem.innerHTML = `
-            <div class="image">
-                    <img src="${info.image}">
-                </div>
-                <div class="name">
-                    ${info.name}
-                </div>
-                <div class="totalPrice">
-				    ₹${info.price * item.quantity}</div>
+                <div class="image"><img src="${info.image}"></div>
+                <div class="name">${info.name}</div>
+                <div class="totalPrice">₹${info.price * item.quantity}</div>
                 <div class="quantity">
                     <span class="minus">-</span>
                     <span>${item.quantity}</span>
                     <span class="plus">+</span>
                 </div>
             `;
-        })
+        });
     }
     iconCartSpan.innerText = totalQuantity;
-}
+};
+
 listCartHTML.addEventListener('click', (event) => {
     let positionClick = event.target;
     if(positionClick.classList.contains('minus') || positionClick.classList.contains('plus')){
@@ -109,21 +108,21 @@ listCartHTML.addEventListener('click', (event) => {
         }
         changeQuantity(product_id, type);
     }
-})
+});
+
 const changeQuantity = (product_id, type) => {
     let positionItemInCart = cart.findIndex((value) => value.product_id == product_id);
-    if(positionItemInCart >= 0){
+    if (positionItemInCart >= 0) {
         let info = cart[positionItemInCart];
         switch (type) {
             case 'plus':
-                cart[positionItemInCart].quantity = cart[positionItemInCart].quantity + 1;
+                cart[positionItemInCart].quantity++;
                 break;
-        
             default:
                 let valueChange = cart[positionItemInCart].quantity - 1;
                 if (valueChange > 0) {
                     cart[positionItemInCart].quantity = valueChange;
-                }else{
+                } else {
                     cart.splice(positionItemInCart, 1);
                 }
                 break;
@@ -131,53 +130,55 @@ const changeQuantity = (product_id, type) => {
     }
     addCartToMemory();
     addCartToHTML();
-}
+};
 
+// Get cart message
 function getCart() {
-    if(localStorage.getItem('cart')){
+    if (localStorage.getItem('cart')) {
         getCartItems = JSON.parse(localStorage.getItem('cart'));
     }
-	if(getCartItems.length > 0){
-		var wa_msg = "Hello! Health Adda!\r\n\r\nI would like to place an order for the following items:\r\n\r\n"
-		var grandTotal = 0;
+    if (getCartItems.length > 0) {
+        var wa_msg = "Hello! Health Adda!\r\n\r\nI would like to place an order for the following items:\r\n\r\n";
+        var grandTotal = 0;
         getCartItems.forEach(item => {
             let positionProduct2 = listProducts.findIndex((value) => value.id == item.product_id);
             let info2 = listProducts[positionProduct2];
-			wa_msg += `${info2.name}\r\n                           ₹${info2.price} x ${item.quantity} = ₹${info2.price * item.quantity}\r\n`;
-  			grandTotal += (info2.price * item.quantity);
-        })
-		wa_msg += `\r\n *Total Bill Amount: ₹${grandTotal}*\r\n\r\n`;
-		wa_msg += `I'll make the payment of ₹${grandTotal} to this same number (7093603760) through GPay/PhonePe or any UPI app or cash after I receive the delivery.\r\n\r\nI'll share the delivery address/location in the next message.`;
+            wa_msg += `${info2.name}\r\n                           ₹${info2.price} x ${item.quantity} = ₹${info2.price * item.quantity}\r\n`;
+            grandTotal += (info2.price * item.quantity);
+        });
+        wa_msg += `\r\n *Total Bill Amount: ₹${grandTotal}*\r\n\r\n`;
+        wa_msg += `I'll make the payment of ₹${grandTotal} to this same number (7093603760) through GPay/PhonePe or any UPI app or cash after I receive the delivery.\r\n\r\nI'll share the delivery address/location in the next message.`;
     } else {
-		wa_msg = `Dear Customer, Your Cart is Empty!! Please add some products before clicking ORDER. Thank you.\r\n`;
+        wa_msg = `Dear Customer, Your Cart is Empty!! Please add some products before clicking ORDER. Thank you.\r\n`;
 	}
-	return wa_msg;
+    return wa_msg;
 }
 
+// Send cart message
 function send_handle() {
-  wa_msg = getCart()
-  wa_msg = window.encodeURIComponent(wa_msg)
-  const win = window.open(`https://wa.me/917093603760?text=${wa_msg}`, '_blank');
-  localStorage.removeItem('cart');
-  var cart = [];
-  var getCartItems = [];
+    wa_msg = getCart();
+    wa_msg = window.encodeURIComponent(wa_msg);
+    const win = window.open(`https://wa.me/917093603760?text=${wa_msg}`, '_blank');
+    localStorage.removeItem('cart');
+    var cart = [];
+    var getCartItems = [];
 }
 
-// Function to show slides
+// Show slides function
 function showSlides() {
     // Hide all slides
     for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
-	//dots
-	var dots = document.getElementsByClassName("demo");
-	for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" w3-white", "");
+    // Dots
+    var dots = document.getElementsByClassName("demo");
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" w3-white", "");
     }
     // Increment slideIndex and wrap around if necessary
     slideIndex = (slideIndex + slides.length) % slides.length;
     slides[slideIndex].style.display = "block";
-	dots[slideIndex].className += " w3-white";
+    dots[slideIndex].className += " w3-white";
 }
 
 // Function to change slide by a specified increment (+1 or -1)
@@ -186,6 +187,7 @@ function changeSlide(n) {
     showSlides();
 }
 
+// Show current slide
 function currentDiv(n) {
     slideIndex = n
     showSlides();
@@ -197,6 +199,7 @@ setInterval(function() {
     showSlides();
 }, 2000);
 
+// Add slides to HTML
 const addSlideToHTML = () => {
     slideShowHTML.innerHTML = `
         <div class="w3-content w3-display-container">
@@ -225,9 +228,10 @@ const addSlideToHTML = () => {
                 <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(10)"></span>
         	</div>
         </div>
-	`;
-}
+    `;
+};
 
+// Add contact details to HTML
 const addContactToHTML = () => {
     contactUsHTML.innerHTML = `
         <h4 style="color:black;">CONTACT US</h4>
@@ -235,8 +239,16 @@ const addContactToHTML = () => {
         <a href="mailto:health.adda.oils@gmail.com" class="spaced-link"><i class="fa fa-envelope" style="font-size:36px;color:black"></i></a>
         <a href="https://maps.app.goo.gl/sPzAQJF6wusfymZP8" target="_blank" rel="noopener noreferrer" class="spaced-link"><i class="fa fa-map-marker" style="font-size:36px;color:black"></i></a>
         <a href="https://wa.me/917093603760?text=Hi!%20Health%20Adda!"><i class="fa fa-whatsapp" style="font-size:36px;color:green"></i></a>
-	`;
-}
+    `;
+};
+
+// Show popup function
+const showPopup = () => {
+    popup.classList.add("show"); 
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 800);
+};
 
 const initApp = () => {
     // get data product
