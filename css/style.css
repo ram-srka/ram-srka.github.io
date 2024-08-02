@@ -165,8 +165,8 @@ body.showCart .container{
 .popup {
     display: none;
     position: fixed;
-    top: 50%;
-    left: 35%;
+    top: 35%;
+    left: 50%;
     transform: translateX(-50%);
     background-color: #4CAF50;
     color: white;
