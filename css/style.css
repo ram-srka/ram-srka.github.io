@@ -162,29 +162,6 @@ body.showCart .container{
 .spaced-link {
   margin-right: 40px; 
 }
-
-
-.quantity-controls {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-.quantity-controls button,
-.quantity-controls span {
-    padding: 5px 10px;
-    border: none;
-    background-color: #353432;
-    color: #eee;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 5px;
-}
-.quantity-controls span {
-    margin: 0 5px;
-}
-
-
-
 @media only screen and (max-width: 992px) {
     .listProduct{
         grid-template-columns: repeat(3, 1fr);

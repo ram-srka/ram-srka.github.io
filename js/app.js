@@ -27,33 +27,13 @@ const addDataToHTML = () => {
             let newProduct = document.createElement('div');
             newProduct.classList.add('item');
             newProduct.dataset.id = product.id;
-			
-            // Check if this product is already in the cart
-            let cartItem = cart.find(item => item.product_id === product.id);
-            let quantity = cartItem ? cartItem.quantity : 0;
-
             newProduct.innerHTML = `
 			    <img src="${product.image}" alt="">
                 <h2>${product.name}</h2>
 				<div class="price">₹<strike>${product.mrpprice}</strike>  ₹${product.price}</div>
-                ${quantity > 0 ?
-                    `<div class="quantity-controls">
-                        <button class="minus">-</button>
-                        <span class="quantity">${quantity}</span>
-                        <button class="plus">+</button>
-                    </div>`
-                    :
-                    `<button class="addCart">Add To Cart</button>`
-                }
+                <button class="addCart">Add To Cart</button>
 			`;
-			// Append the new product item to the listProductHTML
             listProductHTML.appendChild(newProduct);
-            // Add event listener to the "Add to Cart" button
-            let addButton = newProduct.querySelector('.addCart');
-            addButton.addEventListener('click', () => {
-                //addToCart(product.id);
-				let abc = '';
-            });
         })
     }
 }
@@ -63,7 +43,6 @@ listProductHTML.addEventListener('click', (event) => {
     if(positionClick.classList.contains('addCart')){
         let id_product = positionClick.parentElement.dataset.id;
         addToCart(id_product);
-		addDataToHTML();
     }
 })
 
