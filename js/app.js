@@ -33,7 +33,7 @@ const addDataToHTML = () => {
             newProduct.innerHTML = `
                 <img src="${product.image}" alt="">
                 <h2>${product.name}</h2>
-                <div class="price">WSP ₹${product.price} MRP ₹${product.mrpprice}</div>
+                <div class="price">MRP ₹${product.mrpprice}<br>WSP ₹${product.price}</div>
                 <button class="addCart">Add To Cart</button>
             `;
             listProductHTML.appendChild(newProduct);
